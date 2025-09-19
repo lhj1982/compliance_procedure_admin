@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Procedure Admin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Page -->
+        <div id="login-page" class="page active">
+            <div class="login-container">
+                <div class="login-form">
+                    <h1>Compliance Admin Portal</h1>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                    <div id="error-message" class="error hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page">
+            <nav class="navbar">
+                <div class="nav-brand">Compliance Admin Portal</div>
+                <div class="nav-links">
+                    <button id="add-procedure-btn" class="btn btn-primary">Add Procedure</button>
+                    <button id="logout-btn" class="btn btn-secondary">Logout</button>
+                </div>
+            </nav>
+
+            <main class="main-layout">
+                <!-- Left Sidebar - Procedures List -->
+                <div class="sidebar">
+                    <div class="sidebar-header">
+                        <h3>Compliance Procedures</h3>
+                        <div class="search-box">
+                            <input type="text" id="search-procedures" placeholder="Search procedures...">
+                        </div>
+                    </div>
+                    <div class="procedures-list" id="procedures-list">
+                        <!-- Procedure cards will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <!-- Right Main Panel - Procedure Details -->
+                <div class="main-panel">
+                    <div id="welcome-view" class="content-view active">
+                        <div class="welcome-message">
+                            <h2>Welcome to Compliance Admin Portal</h2>
+                            <p>Select a procedure from the left panel to view details</p>
+                        </div>
+                    </div>
+
+                    <div id="procedure-detail-view" class="content-view">
+                        <div class="procedure-header">
+                            <h2 id="procedure-title">Procedure</h2>
+                            <div class="procedure-meta">
+                                <span id="procedure-team" class="meta-item"></span>
+                                <span id="procedure-created" class="meta-item"></span>
+                            </div>
+                        </div>
+
+                        <div class="procedure-info">
+                            <div class="info-section">
+                                <label>Control name:</label>
+                                <span id="control-name"></span>
+                            </div>
+                            <div class="info-section">
+                                <label>File Path:</label>
+                                <a id="file-path-link" href="#" target="_blank"></a>
+                            </div>
+                            <div class="info-section">
+                                <label>Current Status:</label>
+                                <span id="current-status" class="status-badge"></span>
+                            </div>
+                        </div>
+
+                        <div class="document-preview">
+                            <h3>Document Preview</h3>
+                            <div id="preview-content">
+                                <p>Document preview would be displayed here...</p>
+                                <div class="preview-placeholder">
+                                    <p>Click on the file path above to open the document</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button id="return-comment-btn" class="btn btn-warning">Return with Comment</button>
+                            <button id="mark-complete-btn" class="btn btn-success">Mark as Complete</button>
+                            <button id="mark-failed-btn" class="btn btn-danger">Mark as Failed</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="procedure-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Procedure</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="procedure-form">
+                <div class="form-group">
+                    <label for="procedure-team">Team</label>
+                    <select id="procedure-team" name="team_id" required>
+                        <option value="">Select Team</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="procedure-file">File Path</label>
+                    <input type="text" id="procedure-file" name="file_path" required>
+                </div>
+                <div class="form-group">
+                    <label for="procedure-status">Status</label>
+                    <select id="procedure-status" name="status">
+                        <option value="pending">Pending Review</option>
+                        <option value="completed">Completed</option>
+                        <option value="failed">Failed</option>
+                        <option value="returned">Returned for Adjustment</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="comment-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Return with Comment</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="comment-form">
+                <div class="form-group">
+                    <label for="comment-text">Comment</label>
+                    <textarea id="comment-text" name="comment" rows="4" placeholder="Enter your comment..." required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close">Cancel</button>
+                    <button type="submit" class="btn btn-warning">Return with Comment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
