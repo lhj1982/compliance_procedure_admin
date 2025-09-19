@@ -50,6 +50,7 @@ registry=https://registry.npmjs.org/
 scope=@paypalcorp
 @paypalcorp:registry=https://npm.dev.paypalinc.com/
 @izettle:registry=https://npm.pkg.github.com/
+// include your <npm.pkg.github.com/:_authToken=xxx> here as well
 strict-ssl=true
 ```
 
