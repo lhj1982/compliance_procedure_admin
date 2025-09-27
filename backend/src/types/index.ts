@@ -14,7 +14,7 @@ export interface Team {
 export interface TeamsComplianceProcedure {
   id: number;
   team_id: number;
-  file_path: string;
+  document_name: string;
   created_at: Date;
   updated_at: Date;
   status: string;

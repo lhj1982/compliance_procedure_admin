@@ -26,15 +26,15 @@ export const getProcedures = async (req: Request, res: Response) => {
 
 export const createProcedure = async (req: Request, res: Response) => {
   try {
-    const { team_id, file_path, status } = req.body;
+    const { team_id, document_name, status } = req.body;
 
-    if (!team_id || !file_path) {
-      return res.status(400).json({ error: 'Team ID and file path are required' });
+    if (!team_id || !document_name) {
+      return res.status(400).json({ error: 'Team ID and document name are required' });
     }
 
     const result = await pool.query(
-      'INSERT INTO teams_compliance_procedures (team_id, file_path, status, created_at, updated_at) VALUES ($1, $2, $3, NOW(), NOW()) RETURNING *',
-      [team_id, file_path, status || 'draft']
+      'INSERT INTO teams_compliance_procedures (team_id, document_name, status, created_at, updated_at) VALUES ($1, $2, $3, NOW(), NOW()) RETURNING *',
+      [team_id, document_name, status || 'draft']
     );
 
     res.status(201).json(result.rows[0]);
@@ -47,11 +47,11 @@ export const createProcedure = async (req: Request, res: Response) => {
 export const updateProcedure = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { team_id, file_path, status } = req.body;
+    const { team_id, document_name, status } = req.body;
 
     const result = await pool.query(
-      'UPDATE teams_compliance_procedures SET team_id = $1, file_path = $2, status = $3, updated_at = NOW() WHERE id = $4 RETURNING *',
-      [team_id, file_path, status, id]
+      'UPDATE teams_compliance_procedures SET team_id = $1, document_name = $2, status = $3, updated_at = NOW() WHERE id = $4 RETURNING *',
+      [team_id, document_name, status, id]
     );
 
     if (result.rows.length === 0) {

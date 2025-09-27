@@ -12,6 +12,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./schema:/docker-entrypoint-initdb.d
+    networks:
+      - compliance_sample
 
   backend:
     build: ./backend
@@ -30,6 +32,8 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+    networks:
+      - compliance_sample
 
   frontend:
     build: ./frontend
@@ -37,6 +41,12 @@ services:
       - "8080:8080"
     volumes:
       - ./frontend:/app
+    networks:
+      - compliance_sample
 
 volumes:
   postgres_data:
+
+networks:
+  compliance_sample:
+    driver: bridge
